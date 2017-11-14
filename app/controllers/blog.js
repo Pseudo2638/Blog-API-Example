@@ -131,17 +131,19 @@ blogRouter.get('/blog/:id',function(req,res){
   // This is an inbuilt function of mongo db to find data according to the paramter //
   // Here, we find the blog according to the id provided as parameter //
     blogModel.findOne({'blogId':req.params.id},function(err,result){
-          if(err)
-          {
-            // If error, send error as response //
-            var errorResponse = responseGenerator.generate(true,"Blog not found. Please check the id",500,null);
-            res.send(errorResponse);
-          }
-          else
+          if(result)
           {
             // If success, send fetched data as response //
             var successResponse = responseGenerator.generate(false,"Blog found.",200,result);
             res.send(successResponse);
+          }
+          else
+          {
+            // If error, send error as response //
+            var errorResponse = responseGenerator.generate(true,"Blog not found. Please check the id",500,null);
+            res.send(errorResponse);
+            
+            
           }
     });
 });
@@ -169,17 +171,17 @@ blogRouter.put('/blog/:id/edit',function(req,res){
     // This is an inbuilt function of mongo db to find data according to the paramter and update it  //
   // Here, we find the blog according to the id provided as parameter and edit the data if condition is successfull //
   blogModel.findOneAndUpdate({'blogId':req.params.id},update,function(err,result){
-           if(err)
-           {
-            // If error, send error as response //
-            var errorResponse = responseGenerator.generate(true,"Blog not found. Please check the id",500,null);
-            res.send(errorResponse);
-           }
-           else
+           if(result)
            {
             // If success, send result as an response //
             var successResponse = responseGenerator.generate(false,"Blog successfully updated.",200,result);
             res.send(successResponse);
+           }
+           else
+           {
+            // If error, send error as response //
+            var errorResponse = responseGenerator.generate(true,"Blog not found. Please check the id",500,null);
+            res.send(errorResponse);
            }
   });
 });
