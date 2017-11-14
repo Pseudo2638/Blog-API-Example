@@ -9,6 +9,7 @@ var blogSchema = new Schema({
       
       // Here, required:true means, the value is required to be entered if we want to save data to database //
       // and type is used to define the type of data the schema should expect as an input for storing values in database //
+      blogId          : {type:String,default:'',required:true},
       title           : {type:String,default:'',required:true}, 
       subTitle        : {type:String,default:''},
       blogBody        : {type:String,default:''},
@@ -23,5 +24,4 @@ var blogSchema = new Schema({
       authorInfo      : {}
 });
 
-// Create the schema in the form of model and keep it for further reference //
 mongoose.model('Blog',blogSchema);
